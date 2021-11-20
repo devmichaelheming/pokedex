@@ -7,27 +7,20 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
-    .redirect {
-        margin-top: 50px;
-        cursor: pointer;
-        text-decoration: none;
-        color: black;
-        font-size: 18px;
-    }
 `;
 
 export const IconPokebola = styled.img`
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     flex-shrink: 0;
+    animation: rotation 1s linear infinite;
 
-    /* @keyframes upDown {
+    @keyframes rotation {
         0% {
-            background-position: 0% 0%;
+            transform: rotate(0)
         }
         100% {
-            background-position: -135% 0%;
+            transform: rotate(360deg)
         }
-    } */
+    }
 `;

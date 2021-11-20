@@ -1,21 +1,15 @@
 import React from 'react'
-import { Link } from "react-router-dom";
 
-import {
-  Container,
-  IconPokebola,
-} from "../styles/styles";
-
-import iconPokebola from "../assets/pokebola.png";
+import Routes from "../routes";
+import GlobalStyles from "../styles/GlobalStyles";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <Container>
-      <IconPokebola src={iconPokebola} />
-      <Link className="redirect" to="/home">
-        <span>Acessar pokedéx</span>
-      </Link>
-    </Container>
+    <>
+      <Routes />
+      <GlobalStyles />
+    </>
   )
 }
 
