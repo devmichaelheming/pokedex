@@ -7,8 +7,12 @@ import { theme } from '../../styles/theme';
 import {
   Container,
   NamePokemon,
+  SectionAvatar,
+  Background,
   Avatar,
 } from './styles';
+
+import ball from "../../assets/pokeball.svg";
 
 type Props = {
     name: string;
@@ -34,7 +38,7 @@ export default function Card({ name }: Props){
     .then((response) => {
       const { id, types, sprites } = response.data;
 
-      let backgroundColor: any = types[0].type.name;
+      let backgroundColor= types[0].type.name;
 
       setPokemon({
         id,
@@ -58,7 +62,10 @@ export default function Card({ name }: Props){
   return (
     <Container color={pokemon.background}>
       <NamePokemon>{pokemon.name}</NamePokemon>
-      <Avatar src={pokemon.avatar}/>
+      <SectionAvatar>
+        <Avatar src={pokemon.avatar}/>
+        <Background src={ball}/>
+      </SectionAvatar>
     </Container>
   );
 }

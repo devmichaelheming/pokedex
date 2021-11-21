@@ -1,6 +1,20 @@
 import styled from "styled-components";
 import { SearchAlt } from "../../styles/icons";
 
+export const ContainerGeneral = styled.div`
+    position: fixed;
+    display: flex;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    z-index: 2;
+
+    > nav {
+        width: 100%;
+    }
+`;
+
 export const Logo = styled.img`
     width: 25px;
     height: 25px;

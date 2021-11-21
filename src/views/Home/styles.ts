@@ -8,7 +8,7 @@ export const Body = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 60px;
-    padding: 50px 50px 0 50px;
+    padding: 106px 50px 0 50px;
 
     @media(max-width: 1180px) {
         padding: 40px 40px 0 40px;
