@@ -4,40 +4,54 @@ import api from "../../services/api";
 
 import {
     Container,
-    Body
+    Body,
+    Loading,
+    Pokeball,
 } from './styles';
 
 import Header from "../../components/Header";
 import Background from "../../components/Background";
 import Card from "../../components/Card";
 
+import pokeball from "../../assets/pokeball.png";
 interface PropsPokemon {
   name: string;
 }
 
 export default function Home(){
-    const [pokemons, setPokemons] = useState<PropsPokemon[]>([]);
+	const [pokemons, setPokemons] = useState<PropsPokemon[]>([]);
+	const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        api.get('/pokemon?limit=100')
-        .then((response) => {
-          setPokemons(response.data.results)
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }, [])
+	useEffect(() => {
+		setLoading(true);
+		api.get('/pokemon?limit=48')
+		.then((response) => {
+			setPokemons(response.data.results)
+			setLoading(false);
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+	}, [])
 
   return (
     <Container>
       <Header />
-      <Body>
-        {
-          pokemons.map((pokemon, id) => (
-            <Card key={id} name={pokemon.name}/>
-          ))
-        }
-      </Body>
+      {
+        loading
+        ?
+        <Loading>
+          <Pokeball src={pokeball} />
+        </Loading>
+        :
+        <Body>
+          {
+            pokemons.map((pokemon, id) => (
+              <Card key={id} name={pokemon.name}/>
+            ))
+          }
+        </Body>
+      }
       <Background />
     </Container>
   );

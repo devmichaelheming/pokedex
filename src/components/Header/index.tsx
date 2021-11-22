@@ -9,7 +9,7 @@ import {
     IconSearch,
 } from "./styles";
 
-import logoPokeball from "../../assets/pokebola.png";
+import logoPokeball from "../../assets/pokeball.png";
 
 export default function Header() {
     function searchPokemon(e: string){

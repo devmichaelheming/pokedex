@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 
 import api from "../../services/api";
 
@@ -6,20 +7,21 @@ import { theme } from '../../styles/theme';
 
 import {
   Container,
-  SectionInfo,
-  NamePokemon,
-  Types,
-  TypePokemon,
+  GoBack,
+  IconBack,
+  Header,
+  Title,
+  HeaderInfo,
   SectionAvatar,
-  Background,
+  SectionTitle,
+  Types,
+  TypeItem,
   Avatar,
+  Background,
+  Body,
 } from './styles';
 
 import darkPokeball from "../../assets/darkPokeball.svg";
-
-type Props = {
-    name: string;
-}
 
 interface pokemonTypeProps {
   name: string;
@@ -34,13 +36,15 @@ interface pokemonProps {
   types: pokemonTypeProps[];
 }
 
-export default function Card({ name }: Props){
+export default function Details(){
   const [pokemon, setPokemon] = useState({} as pokemonProps);
+  let params = useParams();
+  let name = params.name;
   
   useEffect(() => {
     api.get(`/pokemon/${name}`)
     .then((response) => {
-      const { id, types, sprites } = response.data;
+      const { id, types, sprites, stats } = response.data;
 
       let backgroundColor = types[0].type.name;
       
@@ -57,12 +61,16 @@ export default function Card({ name }: Props){
         avatar: sprites.other['official-artwork'].front_default,
         types: types.map((pokemonType: any) =>{
           let typeName = pokemonType.type.name;
-
           return {
             name: pokemonType.type.name,
             backgroundColor: theme.colors.type[typeName],
           }
         }),
+        // stats: stats.map((stat: any) =>{
+        //   return {
+        //     name: stat.stat,
+        //   }
+        // }),
       })
     })
     .catch((err) => {
@@ -71,26 +79,36 @@ export default function Card({ name }: Props){
   }, [])
 
   return (
-    <Container to={`details/${name}`} color={pokemon.backgroundColor}>
-      <SectionInfo>
-        <NamePokemon>{pokemon.name}</NamePokemon>
-        <Types>
-          { pokemon.types
-            ?
-              pokemon.types.map((type, id) => (
-                <TypePokemon key={id} color={type.backgroundColor}>
-                  {type.name}
-                </TypePokemon>
-              ))
-            :
-              <></>
-          }
-        </Types>
-      </SectionInfo>
-      <SectionAvatar>
-        <Avatar className="avatar" src={pokemon.avatar}/>
-        <Background className="bgPokeball" src={darkPokeball}/>
-      </SectionAvatar>
+    <Container>
+      <GoBack to="/">
+        <IconBack />
+      </GoBack>
+      <Header color={pokemon.backgroundColor}>
+        <Title>{pokemon.name}</Title>
+        <HeaderInfo>
+          <SectionAvatar>
+            <Avatar className="avatar" src={pokemon.avatar}/>
+            <Background className="background" src={darkPokeball}/>
+          </SectionAvatar>
+          <SectionTitle>
+            <span>{pokemon.name}</span>
+            <Types>
+              { pokemon.types
+                ?
+                  pokemon.types.map((type, id) => (
+                    <TypeItem key={id} color={type.backgroundColor}>
+                      {type.name}
+                    </TypeItem>
+                  ))
+                :
+                  <></>
+              }
+            </Types>
+          </SectionTitle>
+        </HeaderInfo>
+      </Header>
+      <Body>
+      </Body>
     </Container>
   );
 }
