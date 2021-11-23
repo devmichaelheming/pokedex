@@ -2,10 +2,7 @@ import styled from 'styled-components';
 import ball from "../../assets/ball.svg";
 import { Link } from 'react-router-dom';
 interface Props {
-    color: string;
-}
-interface typeProps {
-    color: string;
+    bgColor: string;
 }
 
 export const Container = styled(Link)<Props>`
@@ -14,7 +11,7 @@ export const Container = styled(Link)<Props>`
     position: relative;
     text-decoration: none;
     display: flex;
-    background: ${props => props.color};
+    background: ${props => props.bgColor};
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
@@ -54,17 +51,6 @@ export const Types = styled.div`
     justify-content: flex-start;
     margin-top: 10px;
     gap: 10px;
-`
-
-export const TypePokemon = styled.div<typeProps>`
-    background: ${props => props.color};
-    padding: 4px 15px;
-    border-radius: 10px;
-    font-weight: bold;
-`
-
-export const IconType = styled.img`
-    
 `
 
 export const SectionAvatar = styled.div`

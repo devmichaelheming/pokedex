@@ -4,11 +4,11 @@ import { CatchingPokemon } from "@styled-icons/material/CatchingPokemon";
 import { ArrowIosBack } from "@styled-icons/evaicons-solid/ArrowIosBack";
 
 interface Props {
-    color: string;
+    bgColor: string;
 }
 
 interface typeProps {
-    color: string;
+    bgColor: string;
 }
 
 export const Container = styled.div`
@@ -44,7 +44,7 @@ export const Header = styled.div<Props>`
     width: 100%;
     height: auto;
     padding-bottom: 100px;
-    background-color: ${props => props.color};
+    background-color: ${props => props.bgColor};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +64,6 @@ export const SectionAvatar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 
     .background, .avatar {
         transition: all 0.4s ease-in-out;
@@ -94,13 +93,13 @@ export const SectionTitle = styled.div`
         font-family: "Roboto";
         font-weight: bold;
         font-size: 50px;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
 `
 
 export const Types = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
 `
 
@@ -109,18 +108,23 @@ export const TypeItem = styled.div<typeProps>`
     color: white;
     padding: 4px 20px;
     border-radius: 10px;
-    background-color: ${props => props.color};
-    filter: brightness(1.2);
+    background-color: ${props => props.bgColor};
+    transition: 0.2s ease-out;
+    
+    &:hover {
+        transition: 0.2s ease-out;
+        filter: brightness(1.1);
+    }
 `
 
 export const Title = styled.span`
     color: #fff;
-    font-size: 400px;
-    line-height: 400px;
+    font-size: min(18vw);
+    line-height: min(18vw);
     z-index: 3;
     font-family: "Roboto";
     font-weight: 200;
-    opacity: 0.1;
+    opacity: 0.2;
 `;
 
 export const Avatar = styled.img`
