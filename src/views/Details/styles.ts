@@ -21,6 +21,7 @@ export const Container = styled.div`
 export const GoBack = styled(Link)`
     cursor: pointer;
     position: relative;
+    z-index: 4;
 `
 
 export const IconBack = styled(ArrowIosBack)`
@@ -134,24 +135,6 @@ export const Background = styled.img`
     position: absolute;
     opacity: 0.2;
     transform: rotate(60deg);
-    /* animation: rotating 3s linear infinite;
-
-    @keyframes rotating {
-        from {
-            -ms-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -webkit-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        to {
-            -ms-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -webkit-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    } */
 `;
 
 export const Body = styled.div`

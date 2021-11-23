@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+    width: 100%;
+    height: 100%;
     position: relative;
 `;
 
 export const Body = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const Pokemons = styled.div`
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 60px;
@@ -20,26 +29,46 @@ export const Body = styled.div`
         gap: 40px;
         grid-template-columns: repeat(1, 1fr);
     }
+`
+
+export const MorePokemons = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+
+    button {
+        width: 40%;
+        height: 70px;
+        background: purple;
+        border-radius: 10px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
 `;
 
 export const Loading = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
 export const Pokeball = styled.img`
-    width: 60px;
-    height: 60px;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
     flex-shrink: 0;
     -webkit-animation: rotating 1s linear infinite;
     -moz-animation: rotating 1s linear infinite;
     -ms-animation: rotating 1s linear infinite;
     -o-animation: rotating 1s linear infinite;
     animation: rotating 1s linear infinite;
-
     @keyframes rotating {
         from {
             -ms-transform: rotate(0deg);
