@@ -1,12 +1,17 @@
-import React, { useState, useEffect, SVGProps } from 'react';
+import React, { useState, useEffect, SVGProps, useMemo } from "react";
 import { useParams } from "react-router-dom";
+import api from "services/api";
 
-import api from "../../services/api";
+import iconTypes from "assets/types";
+import theme from "styles/theme";
 
-import { ButtonType } from "../../components/ButtonType";
+import { ButtonType } from "components/ButtonType";
+import { Description } from "./screens/Description";
+import { Stats } from "./screens/Stats";
+import { Evolution } from "./screens/Evolution";
 
-import { theme } from '../../styles/theme';
-import iconType from "../../assets/types";
+import darkPokeball from "assets/darkPokeball.svg";
+
 import {
   Container,
   GoBack,
@@ -17,13 +22,13 @@ import {
   SectionAvatar,
   SectionTitle,
   Types,
-  TypeItem,
   Avatar,
   Background,
   Body,
-} from './styles';
-
-import darkPokeball from "../../assets/darkPokeball.svg";
+  SectionInfo,
+  SectionButton,
+  ContentInfo,
+} from "./styles";
 
 interface pokemonTypeProps {
   name: string;
@@ -36,79 +41,137 @@ interface pokemonProps {
   name: string | undefined;
   bgColor: string;
   avatar: string;
+  height: string;
+  weight: string;
+  specie: string;
+  stats: {
+    hp: number;
+    attack: number;
+    defense: number;
+    speed: number;
+    specialAttack: number;
+    specialDefense: number;
+  };
   types: pokemonTypeProps[];
 }
 
-export default function Details(){
+export function Details() {
   const [pokemon, setPokemon] = useState({} as pokemonProps);
-  let params = useParams();
-  let name = params.name;
-  
+  const [sectionInfo, setSectionInfo] = useState('Description');
+  const { name } = useParams();
+
+  const handleSections = useMemo(() => {
+      switch (sectionInfo) {
+        case 'Stats':
+          return <Stats pokemon={name}/>
+        break;
+        case "Evolution":
+          return <Evolution pokemon={name}/>
+        break;
+        default:
+          return <Description pokemon={name}/>
+        break;
+      }
+    }, [sectionInfo],
+  )
+
   useEffect(() => {
     api.get(`/pokemon/${name}`)
-    .then((response) => {
-      const { id, types, sprites, stats } = response.data;
+      .then((response) => {
+        const {
+          id,
+          types,
+          sprites,
+          height,
+          weight,
+          species,
+          stats,
+        } = response.data;
 
-      let bgColor = types[0].type.name;
-      
-      // Caso tenha mais do que um tipo, irá verificar se o primeiro tipo é igual a "normal",
-      // se for igual, será pego o segundo tipo para ser utilizado como background.
-      if(types.length > 1 && types[0].type.name == "normal"){
-        bgColor = types[1].type.name
-      }
+        let bgColor: keyof typeof iconTypes = types[0].type.name;
 
-      setPokemon({
-        id,
-        name: name,
-        bgColor: theme.colors.backgroundType[bgColor],
-        avatar: sprites.other['official-artwork'].front_default,
-        types: types.map((pokemonType: any) =>{
-          let typeName = pokemonType.type.name;
-          return {
-            name: pokemonType.type.name,
-            icon: iconType[typeName],
-            bgColor: theme.colors.type[typeName],
-          }
-        }),
+        // Caso tenha mais do que um tipo, irá verificar se o primeiro tipo é igual a "normal",
+        // se for igual, será pego o segundo tipo para ser utilizado como background.
+        if (types.length > 1 && types[0].type.name === "normal") {
+          bgColor = types[1].type.name;
+        }
+
+        setPokemon({
+          id,
+          name,
+          bgColor: theme.colors.backgroundType[bgColor],
+          weight: `${weight / 10} kg`,
+          height: `${height / 10} m`,
+          specie: species.name,
+          avatar: sprites.other["official-artwork"].front_default,
+          stats: {
+            hp: stats[0].base_stat,
+            attack: stats[1].base_stat,
+            defense: stats[2].base_stat,
+            specialAttack: stats[3].base_stat,
+            specialDefense: stats[4].base_stat,
+            speed: stats[5].base_stat,
+          },
+          types: types.map((pokemonType: any) => {
+            const typeName = pokemonType.type.name as keyof typeof iconTypes;
+            return {
+              name: pokemonType.type.name,
+              icon: iconTypes[typeName],
+              bgColor: theme.colors.type[typeName],
+            };
+          }),
+        });
       })
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-  }, [])
+  }, [name]);
 
   return (
     <Container>
       <GoBack to="/">
         <IconBack />
       </GoBack>
-      <Header bgColor={pokemon.bgColor}>
+      <Header bgcolor={pokemon.bgColor}>
         <Title>{pokemon.name}</Title>
         <HeaderInfo>
           <SectionAvatar>
-            <Avatar className="avatar" src={pokemon.avatar}/>
-            <Background className="background" src={darkPokeball}/>
+            <Avatar className="avatar" src={pokemon.avatar} />
+            <Background className="background" src={darkPokeball} />
           </SectionAvatar>
           <SectionTitle>
             <span>{pokemon.name}</span>
             <Types>
-              { pokemon.types
-                ?
-                  pokemon.types.map(type => (
-                    <ButtonType
-                      name={type.name}
-                      icon={type.icon}
-                      bgColor={type.bgColor}
-                    />
-                  ))
-                :
-                  <></>
-              }
+              {pokemon.types ? (
+                pokemon.types.map((type, id) => (
+                  <ButtonType
+                    key={id}
+                    name={type.name}
+                    icon={type.icon}
+                    bgColor={type.bgColor}
+                  />
+                ))
+              ) : (
+                <></>
+              )}
             </Types>
           </SectionTitle>
         </HeaderInfo>
       </Header>
       <Body>
+        <SectionInfo>
+          {
+            ['Description', 'Stats', 'Evolution'].map(name => (
+              <SectionButton
+                key={name}
+                type="button"
+                onClick={()=>{setSectionInfo(name)}}
+                active={name === sectionInfo}
+              >
+                <h3>{name}</h3>
+              </SectionButton>
+            ))
+          }
+        </SectionInfo>
+
+        <ContentInfo>{handleSections}</ContentInfo>
       </Body>
     </Container>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SearchAlt } from "../../styles/icons";
+import { SearchAlt } from "styles/icons";
 
 export const ContainerGeneral = styled.div`
     position: fixed;
@@ -9,6 +9,10 @@ export const ContainerGeneral = styled.div`
     width: 100%;
     border-bottom: 1px solid rgba(0,0,0,0.08);
     z-index: 2;
+
+    a {
+        text-decoration: none;
+    }
 
     > nav {
         width: 100%;

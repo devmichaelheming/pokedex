@@ -1,41 +1,41 @@
-import React from 'react';
+import React from "react";
 
-import TypeBug from './bug.svg';
-import TypeDark from './dark.svg';
-import TypeDragon from './dragon.svg';
-import TypeElectric from './electric.svg';
-import TypeFairy from './fairy.svg';
-import TypeFighting from './fighting.svg';
-import TypeFire from './fire.svg';
-import TypeFlying from './flying.svg';
-import TypeGhost from './ghost.svg';
-import TypeGrass from './grass.svg';
-import TypeGround from './ground.svg';
-import TypeIce from './ice.svg';
-import TypeNormal from './normal.svg';
-import TypePoison from './poison.svg';
-import TypePsychic from './psychic.svg';
-import TypeRock from './rock.svg';
-import TypeSteel from './steel.svg';
-import TypeWater from './water.svg';
+import { ReactComponent as TypeBug } from "./bug.svg";
+import { ReactComponent as TypeDark } from "./dark.svg";
+import { ReactComponent as TypeDragon } from "./dragon.svg";
+import { ReactComponent as TypeElectric } from "./electric.svg";
+import { ReactComponent as TypeFairy } from "./fairy.svg";
+import { ReactComponent as TypeFighting } from "./fighting.svg";
+import { ReactComponent as TypeFire } from "./fire.svg";
+import { ReactComponent as TypeFlying } from "./flying.svg";
+import { ReactComponent as TypeGhost } from "./ghost.svg";
+import { ReactComponent as TypeGrass } from "./grass.svg";
+import { ReactComponent as TypeGround } from "./ground.svg";
+import { ReactComponent as TypeIce } from "./ice.svg";
+import { ReactComponent as TypeNormal } from "./normal.svg";
+import { ReactComponent as TypePoison } from "./poison.svg";
+import { ReactComponent as TypePsychic } from "./psychic.svg";
+import { ReactComponent as TypeRock } from "./rock.svg";
+import { ReactComponent as TypeSteel } from "./steel.svg";
+import { ReactComponent as TypeWater } from "./water.svg";
 
 export default {
-  bug: <img className="iconType" src={TypeBug} />,
-  dark: <img className="iconType" src={TypeDark} />,
-  dragon: <img className="iconType" src={TypeDragon} />,
-  electric: <img className="iconType" src={TypeElectric} />,
-  fairy: <img className="iconType" src={TypeFairy} />,
-  fighting: <img className="iconType" src={TypeFighting} />,
-  fire: <img className="iconType" src={TypeFire} />,
-  flying: <img className="iconType" src={TypeFlying} />,
-  ghost: <img className="iconType" src={TypeGhost} />,
-  grass: <img className="iconType" src={TypeGrass} />,
-  ground: <img className="iconType" src={TypeGround} />,
-  ice: <img className="iconType" src={TypeIce} />,
-  normal: <img className="iconType" src={TypeNormal} />,
-  poison: <img className="iconType" src={TypePoison} />,
-  psychic: <img className="iconType" src={TypePsychic} />,
-  rock: <img className="iconType" src={TypeRock} />,
-  steel: <img className="iconType" src={TypeSteel} />,
-  water: <img className="iconType" src={TypeWater} />,
+  bug: <TypeBug />,
+  dark: <TypeDark />,
+  dragon: <TypeDragon />,
+  electric: <TypeElectric />,
+  fairy: <TypeFairy />,
+  fighting: <TypeFighting />,
+  fire: <TypeFire />,
+  flying: <TypeFlying />,
+  ghost: <TypeGhost />,
+  grass: <TypeGrass />,
+  ground: <TypeGround />,
+  ice: <TypeIce />,
+  normal: <TypeNormal />,
+  poison: <TypePoison />,
+  psychic: <TypePsychic />,
+  rock: <TypeRock />,
+  steel: <TypeSteel />,
+  water: <TypeWater />,
 };

@@ -1,116 +1,110 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import pokeball from "assets/pokeball.png";
+import Background from "components/Background";
+import Card from "components/Card";
+import Header from "components/Header";
+import React, { useState, useEffect, useCallback } from "react";
+import api from "services/api";
 
-import api from "../../services/api";
 import {
-    GeneralContainer,
-    Body,
-    Header,
-    Logo,
-    InputSearch,
-    GroupInput,
-    IconSearch,
-    Pokemons,
-    MorePokemons,
-    Loading,
-    Pokeball,
-} from './styles';
+  Container,
+  Body,
+  Pokemons,
+  MorePokemons,
+  Loading,
+  Pokeball,
+} from "./styles";
 
-import { Navbar, Container } from 'react-bootstrap';
-
-import Background from "../../components/Background";
-import Card from "../../components/Card";
-
-import pokeball from "../../assets/pokeball.png";
 interface PropsPokemon {
   name: string;
 }
 
-export default function Home(){
+export function Home() {
   const LIST_INITIAL_POKEMONS = 12;
   const LIST_MAX_POKEMONS = 700;
 
   const [pokemonsOffset, setPokemonsOffset] = useState(LIST_INITIAL_POKEMONS);
-	const [pokemons, setPokemons] = useState<PropsPokemon[]>([]);  
+  const [pokemons, setPokemons] = useState<PropsPokemon[]>([]);
+  const [pokemonSearch, setPokemonSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const handleListInitialPokemons = useCallback(async () => {
-    const response = await api.get('/pokemon', {
+    const response = await api.get("/pokemon", {
       params: {
         limit: LIST_INITIAL_POKEMONS,
-      }
-    })
+      },
+    });
     setPokemons(response.data.results);
-    }, [],
-  )
+  }, []);
 
-  const handleMorePokemons = useCallback(async (offset) => {
-    setIsLoading(true);
-    const response = await api.get('/pokemon', {
-      params: {
-        limit: LIST_INITIAL_POKEMONS,
-        offset
-      }
-    })
-    setPokemons(state => [...state, ...response.data.results]);
-    setPokemonsOffset(state => state + LIST_INITIAL_POKEMONS);
-    setIsLoading(false);
-    },[],
-  )
+  const handleSearchPokemons = useCallback(async () => {
+    const response = await api.get(`/pokemon?limit=${LIST_MAX_POKEMONS}`);
 
-	useEffect(() => {
-		handleListInitialPokemons();
-	}, [handleListInitialPokemons])
+    setPokemonSearch(pokemonSearch.toLocaleLowerCase());
+
+    // Valida nomes dos pokémons constam no valor da variável pokemonSearch
+    const pokemonsSearch = response.data.results.filter(
+      ({ name }: PropsPokemon) => name.includes(pokemonSearch)
+    );
+    setPokemons(pokemonsSearch);
+  }, [pokemonSearch]);
+
+  const handleMorePokemons = useCallback(
+    async (offset) => {
+      setIsLoading(true);
+      const response = await api.get("/pokemon", {
+        params: {
+          limit: LIST_INITIAL_POKEMONS,
+          offset,
+        },
+      });
+      setPokemons((state) => [...state, ...response.data.results]);
+      setPokemonsOffset((state) => state + LIST_INITIAL_POKEMONS);
+      setIsLoading(false);
+    },
+    [LIST_INITIAL_POKEMONS]
+  );
+
+  useEffect(() => {
+    const isSearch = pokemonSearch.length >= 2;
+
+    if (isSearch) handleSearchPokemons();
+    else handleListInitialPokemons();
+  }, [handleListInitialPokemons, pokemonSearch, handleSearchPokemons]);
 
   return (
-    <GeneralContainer>
-      <Header>
-        <Navbar bg="light" expand="lg">
-          <Container>
-            <Navbar.Brand>
-              <Logo src={pokeball}/>
-              POKÉDEX
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: 'flex-end' }}>
-              <GroupInput>
-                <InputSearch type="search" placeholder="Pesquise aqui o seu pokemon..."/>
-                <IconSearch />
-              </GroupInput>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      </Header>
+    <Container>
+      <Header value={pokemonSearch} onChange={setPokemonSearch} />
       <Body>
         <Pokemons>
-          {
-            pokemons.map((pokemon, id) => (
-              <Card key={id} name={pokemon.name}/>
-            ))
-          }
+          {pokemons.map((pokemon) => (
+            <Card key={pokemon.name} name={pokemon.name} />
+          ))}
         </Pokemons>
-        { pokemons.length > 3 ?
+        {pokemons.length > 3 ? (
           <MorePokemons>
-            {
-            pokemons.length < LIST_MAX_POKEMONS
-            ?
+            {pokemons.length < LIST_MAX_POKEMONS ? (
               <button
                 type="button"
                 onClick={() => handleMorePokemons(pokemonsOffset)}
               >
-                {isLoading? (
+                {isLoading ? (
                   <Loading>
                     CARREGANDO
                     <Pokeball src={pokeball} />
                   </Loading>
-                ) : "MOSTRAR MAIS"}
+                ) : (
+                  "MOSTRAR MAIS"
+                )}
               </button>
-            :
-            <></>
-            }
+            ) : (
+              <></>
+            )}
           </MorePokemons>
-        : <></> }
+        ) : (
+          <></>
+        )}
       </Body>
-    <Background />
-    </GeneralContainer>
+      <Background />
+    </Container>
   );
-}
+};

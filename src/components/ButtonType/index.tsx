@@ -1,8 +1,8 @@
-import React, { SVGProps } from 'react';
+import React, { SVGProps } from "react";
 
 import {
   Container
-} from './styles';
+} from "./styles";
 
 type Props = {
     name: string;
@@ -12,7 +12,7 @@ type Props = {
 
 export function ButtonType({name, bgColor, icon}: Props){
   return (
-    <Container bgColor={bgColor}>
+    <Container bgcolor={bgColor}>
       {icon}
       {name}
     </Container>

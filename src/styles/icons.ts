@@ -1,1 +1,1 @@
-export { SearchAlt } from '@styled-icons/boxicons-regular/SearchAlt';
+export { SearchAlt } from "@styled-icons/boxicons-regular/SearchAlt";

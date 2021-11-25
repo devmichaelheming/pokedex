@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import ball from "../../assets/ball.svg";
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 interface Props {
-    bgColor: string;
+    bgcolor: string;
 }
 
 export const Container = styled(Link)<Props>`
@@ -11,13 +11,25 @@ export const Container = styled(Link)<Props>`
     position: relative;
     text-decoration: none;
     display: flex;
-    background: ${props => props.bgColor};
+    background: ${props => props.bgcolor};
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
     padding: 0 40px;
     transition: all 0.4s ease-in-out; 
+    @media(max-width: 800px){
+        height: auto;
+        flex-direction: column-reverse;
+        padding: 40px 0;
+        gap: 20px;
+    }
+    @media(max-width: 600px){
+        height: auto;
+        padding: 20px;
+        gap: 0;
+        flex-direction: row;
+    }
 
     .bgPokeball, .avatar {
         transition: all 0.4s ease-in-out;
@@ -51,6 +63,10 @@ export const Types = styled.div`
     justify-content: flex-start;
     margin-top: 10px;
     gap: 10px;
+    @media(max-width: 990px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `
 
 export const SectionAvatar = styled.div`
@@ -65,6 +81,15 @@ export const Background = styled.img`
     height: 150px;
     width: 150px;
     opacity: 0.1;
+
+    @media(max-width: 800px){
+        height: 180px;
+        width: 180px;   
+    }
+    @media(max-width: 600px){
+        height: 150px;
+        width: 150px;   
+    }
 `;
 
 export const Avatar = styled.img`

@@ -1,16 +1,13 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import Home from '../views/Home';
-import Details from '../views/Details';
+import React from "react";
+import {Routes, Route} from "react-router-dom";
+import {Details} from "views/Details";
+import {Home} from "views/Home";
 
 export default function routes() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/details/:name" element={<Details />} />
-            </Routes>
-        </BrowserRouter>
-    )
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/details/:name" element={<Details />} />
+    </Routes>
+  );
 }

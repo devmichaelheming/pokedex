@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface Props {
-    bgColor: string;
+    bgcolor: string;
 }
 
 export const Container = styled.div<Props>`
-    background: ${props => props.bgColor};
+    background: ${props => props.bgcolor};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,13 +15,14 @@ export const Container = styled.div<Props>`
     text-transform: uppercase;
     transition: 0.2s ease-out;
 
-    > img {
+    > svg {
+        path {
+            fill: #fff;
+        }
         margin-right: 5px;
         width: 20px;
         height: 20px;
         flex-shrink: 0;
-        color: #fff!important;
-        fill: #fff!important;
     }
     
     &:hover {
