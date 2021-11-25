@@ -1,17 +1,136 @@
-import React, { SVGProps } from 'react';
+import React, { useState, useEffect, SVGProps } from 'react';
+import api from "services/api";
 
 import {
-  Container
+  Container,
+  Title,
+  SectionStats,
+  StatHp,
+  StatAttack,
+  StatDefense,
+  StatSpecialAttack,
+  StatSpecialDefense,
+  StatSpeed,
+  Percentage
 } from './styles';
 
-type Props = {
-  pokemon?: string;
+import iconTypes from "assets/types";
+import theme from "styles/theme";
+
+interface statsProps {
+  id: string;
+  name?: string;
+  bgColor: string;
+  stats: {
+    hp: number;
+    attack: number;
+    defense: number;
+    speed: number;
+    specialAttack: number;
+    specialDefense: number;
+  };
 }
 
-export function Stats({ pokemon }: Props){
+interface Props {
+  name?: string;
+}
+
+export function Stats({ name }: Props){
+  const [stats, setStats] = useState({} as statsProps);
+
+  useEffect(() => {
+    api.get(`/pokemon/${name}`)
+      .then((response) => {
+        // console.log(response.data);
+
+        const {
+          id,
+          types,
+          stats,
+        } = response.data;
+
+        let bgColor: keyof typeof iconTypes = types[0].type.name;
+
+        if (types.length > 1 && types[0].type.name === "normal") {
+          bgColor = types[1].type.name;
+        }
+
+        setStats({
+          id,
+          name,
+          bgColor: theme.colors.type[bgColor],
+          stats: {
+            hp: parseInt(stats[0].base_stat),
+            attack: parseInt(stats[1].base_stat),
+            defense: parseInt(stats[2].base_stat),
+            specialAttack: parseInt(stats[3].base_stat),
+            specialDefense: parseInt(stats[4].base_stat),
+            speed: parseInt(stats[5].base_stat),
+          },
+        });
+
+      })
+  }, [name]);
+
   return (
     <Container>
-      <h1>stats - {pokemon}</h1>
+      <Title color={stats.bgColor}>{name} Stats</Title>
+      <SectionStats>
+          <span>
+            HP
+            <Percentage>
+              <StatHp percentageHp={stats?.stats?.hp}></StatHp>
+              <div className="number">
+                {stats?.stats?.hp}%
+              </div>
+            </Percentage>
+          </span>
+          <span>
+            ATTACK
+            <Percentage>
+              <StatAttack percentageAtk={stats?.stats?.attack}></StatAttack>
+              <div className="number">
+                {stats?.stats?.attack}%
+              </div>
+            </Percentage>
+          </span>
+          <span>
+            DEFENSE
+            <Percentage>
+              <StatDefense percentageDf={stats?.stats?.defense}></StatDefense>
+              <div className="number">
+                {stats?.stats?.defense}%
+              </div>
+            </Percentage>
+          </span>
+          <span>
+            SPECIAL ATTACK
+            <Percentage>
+              <StatSpecialAttack percentageSatk={stats?.stats?.specialAttack}></StatSpecialAttack>
+              <div className="number">
+                {stats?.stats?.specialAttack}%
+              </div>
+            </Percentage>
+          </span>
+          <span>
+            SPECIAL DEFENSE
+            <Percentage>
+              <StatSpecialDefense percentageSdf={stats?.stats?.specialDefense}></StatSpecialDefense>
+              <div className="number">
+                {stats?.stats?.specialDefense}%
+              </div>
+            </Percentage>
+          </span>
+          <span>
+            SPEED
+            <Percentage>
+              <StatSpeed percentageSp={stats?.stats?.speed}></StatSpeed>
+              <div className="number">
+                {stats?.stats?.speed}%
+              </div>
+            </Percentage>
+          </span>
+      </SectionStats>
     </Container>
   );
 }

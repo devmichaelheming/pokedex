@@ -30,21 +30,20 @@ import {
   ContentInfo,
 } from "./styles";
 
-interface pokemonTypeProps {
+export interface pokemonTypeProps {
   name: string;
   bgColor: string;
   icon: SVGProps<SVGSVGElement>;
 }
 
-interface pokemonProps {
+export interface pokemonProps {
   id: string;
   name: string | undefined;
   bgColor: string;
-  avatar: string;
+  avatar?: string;
   height: string;
   weight: string;
-  specie: string;
-  stats: {
+  stats?: {
     hp: number;
     attack: number;
     defense: number;
@@ -60,21 +59,6 @@ export function Details() {
   const [sectionInfo, setSectionInfo] = useState('Description');
   const { name } = useParams();
 
-  const handleSections = useMemo(() => {
-      switch (sectionInfo) {
-        case 'Stats':
-          return <Stats pokemon={name}/>
-        break;
-        case "Evolution":
-          return <Evolution pokemon={name}/>
-        break;
-        default:
-          return <Description pokemon={name}/>
-        break;
-      }
-    }, [sectionInfo],
-  )
-
   useEffect(() => {
     api.get(`/pokemon/${name}`)
       .then((response) => {
@@ -84,7 +68,6 @@ export function Details() {
           sprites,
           height,
           weight,
-          species,
           stats,
         } = response.data;
 
@@ -102,7 +85,6 @@ export function Details() {
           bgColor: theme.colors.backgroundType[bgColor],
           weight: `${weight / 10} kg`,
           height: `${height / 10} m`,
-          specie: species.name,
           avatar: sprites.other["official-artwork"].front_default,
           stats: {
             hp: stats[0].base_stat,
@@ -121,8 +103,23 @@ export function Details() {
             };
           }),
         });
+
       })
   }, [name]);
+
+  const handleSections = useMemo(() => {
+      switch (sectionInfo) {
+        case "Description":
+          return <Description name={name}/>
+        case 'Stats':
+          return <Stats name={name}/>
+        case "Evolution":
+          return <Evolution name={name}/>
+        default:
+          return <></>;
+      }
+    }, [sectionInfo],
+  )
 
   return (
     <Container>
