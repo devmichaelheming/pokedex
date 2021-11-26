@@ -18,6 +18,10 @@ export const SectionEvolutions = styled.div`
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    gap: 30px;
+    @media(max-width: 500px){
+        gap: 20px;
+    }
 `;
 
 export const Pokemon = styled(Link)`

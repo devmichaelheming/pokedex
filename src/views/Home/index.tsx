@@ -38,8 +38,6 @@ export function Home() {
   const handleSearchPokemons = useCallback(async () => {
     const response = await api.get(`/pokemon?limit=${LIST_MAX_POKEMONS}`);
 
-    setPokemonSearch(pokemonSearch.toLocaleLowerCase());
-
     // Valida nomes dos pokémons constam no valor da variável pokemonSearch
     const pokemonsSearch = response.data.results.filter(
       ({ name }: PropsPokemon) => name.includes(pokemonSearch)

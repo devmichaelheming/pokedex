@@ -19,6 +19,12 @@ export const ContainerGeneral = styled.div`
     }
 
     .navbar .container {
+
+        .navbar-toggler{
+            box-shadow: none;
+            outline: 0;
+        }
+        
         .navbar-collapse {
             padding: 10px 0;
             justify-content: flex-end;

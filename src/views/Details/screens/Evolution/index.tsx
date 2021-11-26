@@ -100,7 +100,7 @@ export function Evolution({ name, color }: Props){
                 <Pokemon key={id} color={color} to={`/details/${pokemon.name}`}>
                   <h3>{pokemon.name}</h3>
                   <AvatarPokemon src={pokemon.avatar}/>
-                  {pokemonEvolutions.length <= 3 ? `Lvl: ${pokemon.level}` : "(Level undefined)"}
+                  {pokemonEvolutions.length <= 3 ? `Lvl: ${pokemon.level}` : ""}
                   <Background className="background" src={darkPokeball} />
                 </Pokemon>
               </>
