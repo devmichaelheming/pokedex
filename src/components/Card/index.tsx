@@ -35,7 +35,7 @@ interface pokemonProps {
   types: pokemonTypeProps[];
 }
 
-export default function Card({ name }: Props){
+export function Card({ name }: Props){
   const [pokemon, setPokemon] = useState({} as pokemonProps);
   
   useEffect(() => {

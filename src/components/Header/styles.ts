@@ -17,6 +17,34 @@ export const ContainerGeneral = styled.div`
     > nav {
         width: 100%;
     }
+
+    .navbar .container {
+        .navbar-collapse {
+            padding: 10px 0;
+            justify-content: flex-end;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .navbar .container {
+            max-width: 100%;
+            padding: 0 20px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .navbar .container {
+            .navbar-collapse {
+                padding: 15px 0 5px 0;
+            }
+        }
+    }
+
+    @media (max-width: 475px) {
+        .navbar .container {
+            padding: 0 10px;
+        }
+    }
 `;
 
 export const Logo = styled.img`
@@ -33,6 +61,10 @@ export const GroupInput = styled.div`
     display: flex;
     align-items: center;
     position: relative;
+    
+    @media (max-width: 991px) {
+        width: 100%;
+    }
 `
 
 export const InputSearch = styled.input`

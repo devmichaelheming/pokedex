@@ -1,9 +1,9 @@
-import iconPokeball from "assets/bgPokeball.png";
 import React from "react";
+import iconPokeball from "assets/bgPokeball.png";
 
 import { Container, IconPokeball } from "./styles";
 
-export default function Background() {
+export function Background() {
   return (
     <Container>
       <IconPokeball src={iconPokeball} />

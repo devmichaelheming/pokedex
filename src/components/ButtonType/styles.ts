@@ -14,6 +14,11 @@ export const Container = styled.div<Props>`
     font-weight: bold;
     text-transform: uppercase;
     transition: 0.2s ease-out;
+    
+    @media(max-width: 600px){
+        font-size: 12px;
+        padding: 4px 10px;
+    }
 
     > svg {
         path {

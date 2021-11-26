@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 interface Props {
     percentage: number;
@@ -29,7 +29,7 @@ export const SectionStats = styled.div`
         width: 90%;
     }
     @media(max-width: 550px){
-        width: 100%;
+        width: 95%;
     }
 
     span {

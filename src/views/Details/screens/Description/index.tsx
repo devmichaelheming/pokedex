@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import api from "services/api";
 
 import {
@@ -10,9 +10,8 @@ import {
 import iconTypes from "assets/types";
 import theme from "styles/theme";
 
-import { pokemonProps, pokemonTypeProps } from "../../index";
+import { pokemonProps } from "../../index";
 
-import { ButtonType } from "components/ButtonType";
 interface Props {
   name?: string;
 }
@@ -73,7 +72,7 @@ export function Description({ name }: Props){
         setPokemonSpecie({
           capture_rate,
           base_happiness,
-          growth_rate: growth_rate.name.replace('-', ' '),
+          growth_rate: growth_rate.name.replace("-", " "),
         });
       });
     }
@@ -88,16 +87,14 @@ export function Description({ name }: Props){
           <li><strong>Specie:</strong> {description.name}</li>
           <li><strong>Height:</strong> {description.height}</li>
           <li><strong>Weight:</strong> {description.weight}</li>
-          <li><strong>{description?.types?.length > 1 ? 'Types:' : 'Type:'}</strong>
-            <ul>
-              {description.types ? (
-                description.types.map((type, id) => (
-                  <li key={id}> {type.name} </li>
-                ))
-              ) : (
-                <></>
-              )}
-            </ul>
+          <li><strong>{description?.types?.length > 1 ? "Types:" : "Type:"}</strong>
+            {description.types ? (
+              description.types.map((type, id) => (
+                <span key={id}> {id !== 0 ? "and" : ""} {type.name}</span>
+              ))
+            ) : (
+              <></>
+            )}
           </li>
         </ul>
         <ul>

@@ -34,8 +34,10 @@ export const IconBack = styled(ArrowIosBack)`
   transition: all 0.3s ease-out;
 
   @media(max-width: 600px) {
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
   }
 
   &:hover {
@@ -54,10 +56,12 @@ export const Header = styled.div<Props>`
   justify-content: center;
   flex-direction: column;
   position: relative;
+
   @media(max-width: 600px) {
     padding-top: 80px;
     padding-bottom: 120px;
   }
+
   @media(max-width: 500px) {
     padding-top: 120px;
     padding-bottom: 120px;
@@ -74,9 +78,11 @@ export const HeaderInfo = styled.div`
     flex-direction: column;
     gap: 80px;
   }
+
   @media(max-width: 800px) {
     gap: 40px;
   }
+
   @media(max-width: 600px) {
     flex-direction: row;
     gap: 60px;
@@ -123,6 +129,7 @@ export const SectionTitle = styled.div`
     @media(max-width: 800px) {
       font-size: 40px;
     }
+    
     @media(max-width: 500px) {
       font-size: 36px;
       line-height: 36px;
@@ -162,6 +169,7 @@ export const Title = styled.span`
   @media(max-width: 1180px) {
     font-size: min(24vw);
   }
+
   @media(max-width: 600px) {
     display: none;
   }
@@ -177,6 +185,7 @@ export const Avatar = styled.img`
     width: 150px;
     height: 150px;
   }
+
   @media(max-width: 500px) {
     width: 100px;
     height: 100px;
@@ -190,10 +199,12 @@ export const Background = styled.img`
   opacity: 0.2;
   flex-shrink: 0;
   transform: rotate(60deg);
+
   @media(max-width: 800px) {
     width: 200px;
     height: 200px;
   }
+
   @media(max-width: 500px) {
     width: 150px;
     height: 150px;
@@ -202,7 +213,7 @@ export const Background = styled.img`
 
 export const Body = styled.div`
   width: 100%;
-  min-height: 400px;
+  height: 400px;
   background-color: #fff;
 `;
 
@@ -212,6 +223,10 @@ export const SectionInfo = styled.div`
   align-items: center;
   justify-content: space-evenly;
   margin-top: -45px;
+
+  @media(max-width: 800px) {
+    justify-content: space-around;
+  }
 `;
 
 export const SectionButton = styled.button<{active: boolean}>`
@@ -233,4 +248,8 @@ export const ContentInfo = styled.div`
   padding: 60px 40px;
   display: flex;
   align-items: center;
+  
+  @media(max-width: 600px) {
+    padding: 30px 10px;
+  }
 `

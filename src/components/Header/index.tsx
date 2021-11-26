@@ -15,7 +15,7 @@ type Props = {
   onChange(value: string): void;
 };
 
-export default function Header({ value, onChange }: Props) {
+export function Header({ value, onChange }: Props) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputBlur = useCallback(() => {
@@ -35,10 +35,7 @@ export default function Header({ value, onChange }: Props) {
             POKÉDEX
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse
-            id="basic-navbar-nav"
-            style={{ justifyContent: "flex-end" }}
-          >
+          <Navbar.Collapse id="basic-navbar-nav">
             <GroupInput>
               <InputSearch
                 type="text"

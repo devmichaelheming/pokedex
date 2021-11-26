@@ -6,10 +6,12 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
   html, body, #root {
     height: 100%;
     width: 100%;
   }
+  
   *, button, input {
     font-family: "Roboto", sans-serif;
   }

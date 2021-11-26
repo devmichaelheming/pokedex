@@ -1,7 +1,3 @@
-import pokeball from "assets/pokeball.png";
-import Background from "components/Background";
-import Card from "components/Card";
-import Header from "components/Header";
 import React, { useState, useEffect, useCallback } from "react";
 import api from "services/api";
 
@@ -10,16 +6,19 @@ import {
   Body,
   Pokemons,
   MorePokemons,
-  Loading,
-  Pokeball,
 } from "./styles";
+
+import { Background } from "components/Background";
+import { Card } from "components/Card";
+import { Header } from "components/Header";
+import { Loading } from "components/Loading";
 
 interface PropsPokemon {
   name: string;
 }
 
 export function Home() {
-  const LIST_INITIAL_POKEMONS = 12;
+  const LIST_INITIAL_POKEMONS = 9;
   const LIST_MAX_POKEMONS = 700;
 
   const [pokemonsOffset, setPokemonsOffset] = useState(LIST_INITIAL_POKEMONS);
@@ -88,10 +87,7 @@ export function Home() {
                 onClick={() => handleMorePokemons(pokemonsOffset)}
               >
                 {isLoading ? (
-                  <Loading>
-                    CARREGANDO
-                    <Pokeball src={pokeball} />
-                  </Loading>
+                  <Loading />
                 ) : (
                   "MOSTRAR MAIS"
                 )}

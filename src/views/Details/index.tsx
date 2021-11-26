@@ -56,7 +56,7 @@ export interface pokemonProps {
 
 export function Details() {
   const [pokemon, setPokemon] = useState({} as pokemonProps);
-  const [sectionInfo, setSectionInfo] = useState('Description');
+  const [sectionInfo, setSectionInfo] = useState("Description");
   const { name } = useParams();
 
   useEffect(() => {
@@ -111,10 +111,10 @@ export function Details() {
       switch (sectionInfo) {
         case "Description":
           return <Description name={name}/>
-        case 'Stats':
+        case "Stats":
           return <Stats name={name}/>
         case "Evolution":
-          return <Evolution name={name}/>
+          return <Evolution name={name} color={pokemon.bgColor}/>
         default:
           return <></>;
       }
@@ -155,7 +155,7 @@ export function Details() {
       <Body>
         <SectionInfo>
           {
-            ['Description', 'Stats', 'Evolution'].map(name => (
+            ["Description", "Stats", "Evolution"].map(name => (
               <SectionButton
                 key={name}
                 type="button"

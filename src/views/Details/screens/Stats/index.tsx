@@ -1,4 +1,4 @@
-import React, { useState, useEffect, SVGProps } from 'react';
+import React, { useState, useEffect } from "react";
 import api from "services/api";
 
 import {
@@ -12,7 +12,7 @@ import {
   StatSpecialDefense,
   StatSpeed,
   Percentage
-} from './styles';
+} from "./styles";
 
 import iconTypes from "assets/types";
 import theme from "styles/theme";
@@ -41,7 +41,6 @@ export function Stats({ name }: Props){
   useEffect(() => {
     api.get(`/pokemon/${name}`)
       .then((response) => {
-        // console.log(response.data);
 
         const {
           id,
@@ -60,12 +59,12 @@ export function Stats({ name }: Props){
           name,
           bgColor: theme.colors.type[bgColor],
           stats: {
-            hp: parseInt(stats[0].base_stat),
-            attack: parseInt(stats[1].base_stat),
-            defense: parseInt(stats[2].base_stat),
-            specialAttack: parseInt(stats[3].base_stat),
-            specialDefense: parseInt(stats[4].base_stat),
-            speed: parseInt(stats[5].base_stat),
+            hp: stats[0].base_stat,
+            attack: stats[1].base_stat,
+            defense: stats[2].base_stat,
+            specialAttack: stats[3].base_stat,
+            specialDefense: stats[4].base_stat,
+            speed: stats[5].base_stat,
           },
         });
 
