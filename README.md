@@ -1,4 +1,7 @@
 # Pokédex
+
+![GIF](https://i.ibb.co/2Z0R5hS/preview.gif)
+
 Este projeto foi desenvolvido utilizando React Js, tem como objetivo a criação de uma landing page para buscar, listar e detalhar pokémons, tudo isso é possivel utilizando a API REST [PokéApi](https://pokeapi.co/).
 
 > Status: Finalizado ⚠️
