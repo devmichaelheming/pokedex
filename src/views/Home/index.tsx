@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import api from "services/api";
 
+import { Background, Card, Header, Loading } from "components";
+
 import {
   Container,
   Body,
@@ -8,16 +10,11 @@ import {
   MorePokemons,
 } from "./styles";
 
-import { Background } from "components/Background";
-import { Card } from "components/Card";
-import { Header } from "components/Header";
-import { Loading } from "components/Loading";
-
 interface PropsPokemon {
   name: string;
 }
 
-export function Home() {
+export var Home = function () {
   const LIST_INITIAL_POKEMONS = 9;
   const LIST_MAX_POKEMONS = 700;
 
@@ -38,9 +35,11 @@ export function Home() {
   const handleSearchPokemons = useCallback(async () => {
     const response = await api.get(`/pokemon?limit=${LIST_MAX_POKEMONS}`);
 
+    setPokemonSearch(pokemonSearch.toLocaleLowerCase());
+
     // Valida nomes dos pokémons constam no valor da variável pokemonSearch
     const pokemonsSearch = response.data.results.filter(
-      ({ name }: PropsPokemon) => name.includes(pokemonSearch)
+      ({ name }: PropsPokemon) => name.includes(pokemonSearch),
     );
     setPokemons(pokemonsSearch);
   }, [pokemonSearch]);
@@ -58,7 +57,7 @@ export function Home() {
       setPokemonsOffset((state) => state + LIST_INITIAL_POKEMONS);
       setIsLoading(false);
     },
-    [LIST_INITIAL_POKEMONS]
+    [LIST_INITIAL_POKEMONS],
   );
 
   useEffect(() => {

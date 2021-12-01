@@ -10,6 +10,15 @@ export default createGlobalStyle`
   html, body, #root {
     height: 100%;
     width: 100%;
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #9DA0AA;
+        border-radius: 4px;
+    }
   }
   
   *, button, input {

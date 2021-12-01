@@ -119,7 +119,8 @@ export const MorePokemons = styled.div`
   button {
     width: 45%;
     height: 70px;
-    background: purple;
+    background: #83A2E3;
+    border: none;
     border-radius: 10px;
     font-size: 18px;
     display: flex;

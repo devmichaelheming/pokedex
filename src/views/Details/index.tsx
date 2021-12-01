@@ -5,10 +5,11 @@ import api from "services/api";
 import iconTypes from "assets/types";
 import theme from "styles/theme";
 
-import { ButtonType } from "components/ButtonType";
+import { ButtonType } from "components";
 import { Description } from "./screens/Description";
 import { Stats } from "./screens/Stats";
 import { Evolution } from "./screens/Evolution";
+
 
 import darkPokeball from "assets/darkPokeball.svg";
 

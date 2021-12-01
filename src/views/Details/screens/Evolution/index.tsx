@@ -10,7 +10,7 @@ import {
   Background,
 } from "./styles";
 
-import {Loading} from "components/Loading";
+import { Loading } from "components";
 import darkPokeball from "assets/darkPokeball.svg";
 
 interface Props {
